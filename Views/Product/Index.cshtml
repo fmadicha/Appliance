@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Appliance.Models.Product>
+
+@{
+    ViewData["Title"] = "Electrical Appliances";
+}
+
+<h2>Available Electrical Appliances</h2>
+
+<div class="row">
+    @foreach (var appliance in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="@appliance.ImageUrl" class="card-img-top" alt="@appliance.Name" style="height: 200px; object-fit: cover;" />
+                <div class="card-body">
+                    <h5 class="card-title">@appliance.Name</h5>
+                    <p class="card-text">
+                        <strong>Brand:</strong> @appliance.Brand <br />
+                        <strong>Price:</strong> @appliance.Price.ToString("C") <br />
+                        <strong>Category:</strong> @appliance.Category
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="@Url.Action("Details", "Product", new { ProductId = appliance.ProductId })" class="btn btn-primary">View Details</a>
+                        <a href="@Url.Action("AddToCart", "ShoppingCart", new { ProductId = appliance.ProductId })" class="btn btn-success">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
